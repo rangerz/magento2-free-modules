@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Aheadworks\Minifier\Api\RequestManagementInterface" type="Aheadworks\Minifier\Model\Service\RequestService" />
+    <preference for="Aheadworks\Minifier\Api\UrlManagementInterface" type="Aheadworks\Minifier\Model\Service\UrlService" />
+    <preference for="Aheadworks\Minifier\Api\Data\ImageInterface" type="Aheadworks\Minifier\Model\Image" />
+    <preference for="Aheadworks\Minifier\Api\Data\MinifierProductAttributesInterface" type="Aheadworks\Minifier\Model\MinifierProductAttributes" />
+    <preference for="Aheadworks\Minifier\Api\Data\ProductsResponseInterface" type="Aheadworks\Minifier\Model\ProductsResponse" />
+    <preference for="Aheadworks\Minifier\Api\ImageManagementInterface" type="Aheadworks\Minifier\Model\Service\ImageService" />
+    <preference for="Aheadworks\Minifier\Api\AuthorisedImageManagementInterface" type="Aheadworks\Minifier\Model\Service\AuthorisedImageService" />
+
+    <type name="Aheadworks\Minifier\Model\ProductImageUpdater">
+        <arguments>
+            <argument name="imageValidator" xsi:type="object">
+                Aheadworks\Minifier\Model\Data\Validator\ProductImageProcessor\ImageValidator
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Minifier\Model\ResourceModel\Product\Relation\MinifierOptions\ReadHandler">
+        <arguments>
+            <argument name="attributesBuilder" xsi:type="object">Aheadworks\Minifier\Model\ExtensionAttributes\Builder\Product\Composite</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Minifier\Model\ExtensionAttributes\Builder\Product\Composite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="images" xsi:type="object">Aheadworks\Minifier\Model\ExtensionAttributes\Builder\Product\Images</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Magento\Catalog\Api\Data\ProductInterface" xsi:type="array">
+                    <item name="read" xsi:type="array">
+                        <item name="aw_minifier_options_reader" xsi:type="string">Aheadworks\Minifier\Model\ResourceModel\Product\Relation\MinifierOptions\ReadHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,110 @@
+& when (@critical) {
+    :root {
+        --black: @rgb-black;
+        --white: @rgb-white;
+
+        --gray-50:  @rgb-gray-50;
+        --gray-100: @rgb-gray-100;
+        --gray-200: @rgb-gray-200;
+        --gray-300: @rgb-gray-300;
+        --gray-400: @rgb-gray-400;
+        --gray-500: @rgb-gray-500;
+        --gray-600: @rgb-gray-600;
+        --gray-700: @rgb-gray-700;
+        --gray-800: @rgb-gray-800;
+        --gray-900: @rgb-gray-900;
+
+        --red:    @rgb-red;
+        --green:  @rgb-green;
+        --blue:   @rgb-blue;
+        --yellow: @rgb-yellow;
+
+        --brand-color:   @rgb-brand;
+        --danger-color:  @rgb-danger;
+        --info-color:    @rgb-info;
+        --success-color: @rgb-success;
+
+        --base-alpha: 1;
+        --base-color: @rgb-base;
+        --base-bg: @rgb-base-bg;
+        --muted-bg: @rgb-muted-bg;
+        --z-layer-color: @rgb-z-layer;
+        --z-layer-bg: @rgb-z-layer-bg;
+        --z-overlay-bg: @rgb-z-overlay-bg;
+
+        --ring-color: @rgb-ring;
+
+        --link-alpha: .85;
+        --link-color: @rgb-link;
+        --headings-color: @rgb-headings;
+        --block-title-color: @rgb-block-title;
+
+        --input-alpha: 1;
+        --input-color: @rgb-input;
+        --input-bg: @rgb-input-bg;
+        --input-border-alpha: 1;
+        --input-border-color: @rgb-input-border;
+        --input-focus-border-color: @rgb-input-focus-border;
+
+        --button-color: @rgb-button;
+        --button-bg: @rgb-button-bg;
+        --button-bg-alpha: .85;
+        --button-border-alpha: 0;
+        --button-border-color: @rgb-button-border;
+        --button-secondary-color: @rgb-button-secondary;
+        --button-secondary-bg: @rgb-button-secondary-bg;
+        --button-secondary-border-color: @rgb-button-secondary-border;
+
+        --font-family: @font-sans;
+        --font-size: @4;
+        --font-family-mono: @font-mono;
+        --line-height: @6;
+
+        --transition-duration: 200ms;
+
+        --spinner-size: @6;
+        --spinner-border-width: 2px;
+        --spinner-border-color: @rgb-spinner;
+        --spinner-duration: .6s;
+
+        --scrollbar-bg: @rgb-scrollbar-bg;
+        --scrollbar-color: @rgb-scrollbar;
+
+        @media (prefers-reduced-motion) {
+            --transition-duration: 20ms;
+            --spinner-duration: 5s;
+        }
+
+        & when (@respect-color-scheme = true) {
+            @media @media-dark {
+                --gray-800: @dark-rgb-gray-800;
+                --green: @dark-rgb-green;
+                --blue: @dark-rgb-blue;
+                --red: @dark-rgb-red;
+                --muted-alpha: .8;
+                --brand-alpha: 1;
+                --danger-alpha: 1;
+                --info-alpha: 1;
+                --success-alpha: 1;
+                --base-color: @dark-rgb-base;
+                --base-bg: @dark-rgb-base-bg;
+                --muted-bg: @dark-rgb-muted-bg;
+                --z-layer-bg: @dark-rgb-z-layer-bg;
+                --z-overlay-bg-alpha: .65;
+
+                --headings-color: @dark-rgb-headings;
+                --block-title-color: @dark-rgb-block-title;
+
+                --input-border-color: @dark-rgb-input-border;
+
+                --button-bg-alpha: .4;
+                --button-hover-bg-alpha: .5;
+                --button-secondary-color: @dark-rgb-button;
+                --button-secondary-bg: @dark-rgb-button-secondary-bg;
+
+                --scrollbar-bg: @dark-rgb-scrollbar-bg;
+                --scrollbar-color: @dark-rgb-scrollbar;
+            }
+        }
+    }
+}

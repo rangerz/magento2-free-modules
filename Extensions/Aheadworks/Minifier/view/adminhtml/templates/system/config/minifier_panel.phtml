@@ -1,0 +1,10 @@
+<?php
+/** @var $block \Aheadworks\Minifier\Block\Adminhtml\System\Config\MinifierPanel */
+$viewModel = $block->getViewModel();
+?>
+
+<iframe src="<?= /* @noEscape */ $viewModel->getFrameUrl() ?>"
+        name="app-iframe"
+        context="Main"
+        style="padding-top: 2.2rem; border: none; width: 100%; height: 80vh;">
+</iframe>

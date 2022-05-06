@@ -1,0 +1,34 @@
+<?php if ($exist = ($block->getProductCollection() && $block->getProductCollection()->getSize())):?>
+<?php
+    $title = $block->getTitle() ? __($block->getTitle()) : '';
+    $items = $block->getProductCollection()->getItems();
+    $image = 'new_products_content_widget_grid';
+?>
+    <div class="block widget">
+        <?php if ($title):?>
+        <div class="block-title">
+            <strong><?php echo $title; ?></strong>
+        </div>
+        <?php endif; ?>
+        <div class="block-content">
+            <div class="swiper-container" data-mage-init='{"Swissup_Swiper/js/swiper":
+                {
+                    "slidesPerView": 6,
+                    "spaceBetween": 10,
+                    "navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"},
+                    "breakpoints": {"1290": {"slidesPerView": 4}, "480": {"slidesPerView": 2}}
+                }
+            }'>
+                <div class="swiper-wrapper">
+                <?php foreach ($items as $_item): ?>
+                    <a style="margin-right: 10px" href="<?php echo $block->getProductUrl($_item) ?>" class="swiper-slide product-item-photo">
+                        <?php echo $block->getImage($_item, $image)->toHtml(); ?>
+                    </a>
+                <?php endforeach ?>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
+<?php endif;?>

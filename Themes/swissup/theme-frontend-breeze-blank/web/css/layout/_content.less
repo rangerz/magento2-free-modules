@@ -1,0 +1,69 @@
+& when (@critical) {
+    :root {
+        --sidebar-width: 180px;
+        --sidebar-gap: @4;
+        @media @media-lg {
+            --sidebar-width: 220px;
+            --sidebar-gap: @8;
+        }
+    }
+
+    .page-main {
+        &:extend(.container);
+    }
+
+    .column.main {
+        min-height: 300px;
+    }
+
+    .page-title-wrapper ~ .columns {
+        margin-top: @4;
+    }
+
+    // Layout
+    .page-main > .columns {
+        position: relative;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: 1fr;
+        grid-template-areas: "main"
+                             "sidebar"
+                             "additional";
+
+        gap: var(--sidebar-gap);
+        row-gap: 0;
+
+        @media @media-md {
+            .page-layout-3columns &,
+            .page-layout-2columns-left & {
+                grid-template-columns: var(--sidebar-width) 1fr;
+                grid-template-areas: "sidebar main"
+                                     "additional main";
+            }
+
+            .page-layout-2columns-right & {
+                grid-template-columns: 1fr var(--sidebar-width);
+                grid-template-areas: "main sidebar"
+                                     "main additional";
+            }
+        }
+
+        @media @media-lg {
+            .page-layout-3columns & {
+                grid-template-columns: var(--sidebar-width) 1fr var(--sidebar-width);
+                grid-template-areas: "sidebar main additional"
+            }
+        }
+
+        > .main {
+            grid-area: main;
+            min-width: 0
+        }
+        > .sidebar-main {
+            grid-area: sidebar;
+        }
+        > .sidebar-additional {
+            grid-area: additional;
+        }
+    }
+}

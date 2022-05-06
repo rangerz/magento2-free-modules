@@ -1,0 +1,116 @@
+<?php
+$images = $block->getGalleryImages()->getItems();
+$mainImage = current(array_filter($images, function ($img) use ($block) {
+    return $block->isMainImage($img);
+}));
+
+if (!empty($images) && empty($mainImage)) {
+    $mainImage = $block->getGalleryImages()->getFirstItem();
+}
+
+$helper = $block->getData('imageHelper');
+$mainImageUrl = $mainImage ?
+    $mainImage->getData('medium_image_url') :
+    $helper->getDefaultPlaceholderUrl('image');
+
+$width = (int) $block->getImageAttribute('product_page_image_medium', 'width');
+$height = (int) $block->getImageAttribute('product_page_image_medium', 'height');
+$height = $height ?: $width;
+$thumbWidth = (int) $block->getImageAttribute('product_page_image_small', 'width');
+$thumbHeight = (int) $block->getImageAttribute('product_page_image_small', 'height');
+$thumbHeight = $thumbHeight ?: $thumbWidth;
+
+$navType = $block->getGalleryOptions()->getVar('gallery/nav');
+
+$responsiveImageHelper = $this->helper(\Swissup\Breeze\Helper\Image::class);
+$srcset = $responsiveImageHelper->getSrcset($block->getProduct(), 'product_page_image_medium');
+$sizes = $responsiveImageHelper->getSizes('product_page_image_medium');
+$thumbSizes = $responsiveImageHelper->getSizes('product_page_image_small');
+?>
+
+<div class="breeze-gallery <?= $block->getGalleryOptions()->getVar('gallery/navdir') ?>">
+    <div class="stage <?= $mainImage && $mainImage->getVideoUrl() ? 'video' : '' ?>"
+        data-gallery-role="gallery-placeholder">
+        <div class="main-image-wrapper">
+            <img alt="<?= $mainImage ? $mainImage->getLabel() : '' ?>"
+                class="main-image"
+                src="<?= $mainImageUrl ?>"
+                width="<?= $width ?>"
+                height="<?= $height ?>"
+                <?php if ($srcset) : ?>
+                    srcset="<?= $srcset ?>"
+                    sizes="<?= $sizes ?>"
+                <?php endif ?>
+            />
+        </div>
+
+        <?php if (count($images) > 1) : ?>
+            <a href="#" class="prev">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </a>
+            <a href="#" class="next">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+        <?php endif ?>
+    </div>
+
+    <div class="thumbnails <?php echo $navType ? '' : 'hidden' ?>">
+        <?php if (count($images) > 1) : // empty parent wrapper may be used at configurable product page ?>
+            <?php foreach ($images as $image) : ?>
+                <?php
+                    $classes = array_filter([
+                        'item',
+                        $block->isMainImage($image) ? 'active' : '',
+                        $image->getVideoUrl() ? 'video' : ''
+                    ]);
+
+                    $srcset = $responsiveImageHelper->getSrcset($image, 'product_page_image_small');
+                ?>
+                <a class="<?= implode(' ', $classes) ?>" href="<?= $image->getLargeImageUrl() ?>" title="<?= $image->getLabel() ?: __('View Image') ?>">
+                    <img loading="lazy" alt="<?= $image->getLabel() ?>"
+                        src="<?= $image->getSmallImageUrl() ?>"
+                        <?php if ($srcset) : ?>
+                            srcset="<?= $srcset ?>"
+                            sizes="<?= $thumbSizes ?>"
+                        <?php endif ?>
+                        width="<?= $thumbWidth ?>"
+                        height="<?= $thumbHeight ?>"
+                    />
+                </a>
+            <?php endforeach ?>
+        <?php endif ?>
+    </div>
+
+    <a href="#" class="close">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </a>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "[data-gallery-role=gallery-placeholder]": {
+            "mage/gallery/gallery": {
+                "data": <?= /* @noEscape */ $block->getGalleryImagesJson() ?>,
+                "options": <?= /* @noEscape */ $block->getGalleryOptions()->getOptionsJson() ?>
+            }
+        }
+    }
+</script>
+
+<script type="text/x-magento-template" id="gallery-thumbnail">
+    <a class="<%- classes %>" href="<%- full %>">
+        <img loading="lazy" alt="<%- caption %>"
+            src="<%- thumb %>"
+            srcset="<%- srcset ? srcset.small : '' %>"
+            sizes="<?= $thumbSizes ?>"
+            width="<?= $thumbWidth ?>"
+            height="<?= $thumbHeight ?>"
+        />
+    </a>
+</script>

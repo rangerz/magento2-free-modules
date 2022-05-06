@@ -1,0 +1,22 @@
+.breeze-page-narrow {
+    & when (@critical) {
+        @media @media-sm {
+            .breadcrumbs {
+                display: none;
+            }
+            .page-title-wrapper {
+                margin: @narrow-page-title__margin;
+                text-align: @narrow-page-title__text-align;
+            }
+            .page-main {
+                padding-bottom: @narrow-page__padding-bottom;
+                --container-max-width: @sm;
+            }
+        }
+        @media @media-md {
+            .page-main {
+                --container-max-width: @md;
+            }
+        }
+    }
+}

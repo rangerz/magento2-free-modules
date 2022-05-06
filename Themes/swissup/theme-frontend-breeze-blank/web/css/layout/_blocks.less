@@ -1,0 +1,122 @@
+.block {
+    &:extend(.breeze-block-sidebar all);
+}
+.main .block {
+    &:extend(.breeze-block-content all);
+}
+.block-hero,
+.cms-index-index .main .block,
+.catalog-product-view .main > .block {
+    &:extend(.breeze-block-hero all);
+}
+.cms-index-index .main .block,
+.cms-index-index .main .block-hero {
+    &:extend(.breeze-block-hero-cms all);
+}
+
+& when (@critical) {
+    .page-main .block + .block,
+    .page-main .block + script + .block {
+        margin-top: @block__indent;
+    }
+    .sidebar-main .block:last-child {
+        margin-bottom: @block__indent;
+    }
+    .block {
+        .block-title {
+            a {
+                .text-base();
+                &:extend(.link-common all);
+                font-weight: 400;
+            }
+            .counter {
+                .text-sm();
+                white-space: nowrap;
+            }
+        }
+        .subtitle {
+            display: none;
+        }
+        .box {
+            margin-bottom: @3;
+            @media @media-md {
+                width: 50%;
+                .float(left);
+                max-width: 400px;
+                &:last-child {
+                    margin: 0;
+                }
+                &:nth-child(2n+1) {
+                    .clear(left);
+                }
+            }
+            &-title {
+                display: block;
+                margin-bottom: @2;
+            }
+        }
+    }
+
+    .block-actions {
+        margin-bottom: @2;
+    }
+
+    .actions-toolbar,
+    .box-actions {
+        clear: both;
+        display: flex;
+        align-items: center;
+        gap: @2;
+        margin-top: @2;
+
+        a {
+            &:extend(.link-common all);
+        }
+    }
+
+    .actions-toolbar {
+        > .actions,
+        > div.primary,
+        > div.secondary {
+            display: contents;
+         }
+        .page-title-wrapper & {
+            margin: @3 0;
+        }
+        .action.back {
+            display: none;
+        }
+    }
+
+    .sidebar .block .action.delete,
+    .sidebar .block .action.remove {
+        display: inline-flex;
+        align-items: center;
+        .margin-left(auto);
+        span {
+            &:extend(.sr-only);
+        }
+        &::before {
+            content: '';
+            width: @5;
+            height: @5;
+        }
+    }
+}
+
+& when not (@critical) {
+    .block {
+        .block-title {
+            .counter {
+                color: @muted__color;
+            }
+        }
+    }
+    .sidebar .block .action.delete,
+    .sidebar .block .action.remove {
+        color: @muted__color;
+        &::before {
+            .breeze-icon(@icon-x, @4);
+        }
+    }
+}

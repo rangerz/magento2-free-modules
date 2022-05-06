@@ -1,0 +1,4 @@
+"Public API Key","Public API Key"
+"Private API Key","Private API Key"
+"Enable Prefetching","Enable Prefetching"
+"When this function is active, Minifier will track when a user is about to click a link on your shop and load that link in background before the user clicks on it. This way your browser will start loading the next page even before the user clicks the link, making it load faster.","When this function is active, Minifier will track when a user is about to click a link on your shop and load that link in background before the user clicks on it. This way your browser will start loading the next page even before the user clicks the link, making it load faster."

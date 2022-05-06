@@ -1,0 +1,29 @@
+<?php
+    $childHtml = $block->getChildHtml();
+    $srOnly = $block->getSrOnly();
+?>
+
+<div class="<?= $block->getCssClass() ?>">
+    <a class="action toggle switcher-trigger"
+        href="<?= $block->escapeUrl($block->getHref()) ?>"
+        title="<?= $block->escapeHtml($block->getTitle()) ?>"
+        <?php if ($childHtml) : ?>
+            data-mage-init='<?php echo $this->getJsonConfig() ?>'
+            data-toggle="dropdown"
+            data-trigger-keypress-button="true"
+        <?php endif ?>
+    >
+        <?php if ($block->getIcon()) : ?>
+            <?php $srOnly = true ?>
+            <?= $block->getIcon() ?>
+        <?php endif ?>
+
+        <span class="<?= $srOnly ? 'abs-visually-hidden' : '' ?>"><?= $block->escapeHtml($block->getTitle()) ?></span>
+    </a>
+
+    <?php if ($childHtml) : ?>
+        <div class="dropdown switcher-dropdown" data-target="dropdown">
+            <?= $childHtml ?>
+        </div>
+    <?php endif ?>
+</div>

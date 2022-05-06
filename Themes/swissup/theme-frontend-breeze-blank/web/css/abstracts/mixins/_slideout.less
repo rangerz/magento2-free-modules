@@ -1,0 +1,45 @@
+.breeze-slideout {
+    & when (@critical) {
+        position: fixed;
+        visibility: hidden;
+    }
+
+    & when not (@critical) {
+        .transition();
+        .left(0);
+        top: 0;
+        bottom: 0;
+        width: @96;
+        z-index: 850;
+        max-width: ~"calc(100vw - @{16})";
+        background: @z-layer__background;
+        .modrtl(transform, translateX(-100%), translateX(100%));
+        overscroll-behavior: contain;
+        overflow: auto;
+        padding: @4;
+    }
+}
+
+.breeze-slideout-visible {
+    & when not (@critical) {
+        transform: translateX(0);
+        visibility: visible;
+    }
+}
+
+.breeze-slideout-overlay {
+    .breeze-overlay();
+}
+
+.breeze-slideout-overlay-visible {
+    .breeze-overlay-visible();
+}
+
+.breeze-slideout-close {
+    & when not (@critical) {
+        display: block;
+        position: absolute;
+        top: @3;
+        .right(@5);
+    }
+}

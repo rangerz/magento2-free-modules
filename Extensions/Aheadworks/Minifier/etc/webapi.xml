@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/awMinifier/productsCount" method="GET">
+        <service class="Aheadworks\Minifier\Api\AuthorisedImageManagementInterface" method="getProductsCount"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/awMinifier/totalImages" method="GET">
+        <service class="Aheadworks\Minifier\Api\AuthorisedImageManagementInterface" method="getImagesCount"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/awMinifier/products" method="GET">
+        <service class="Aheadworks\Minifier\Api\AuthorisedImageManagementInterface" method="getProducts"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/awMinifier/uploadProductImage" method="POST">
+        <service class="Aheadworks\Minifier\Api\AuthorisedImageManagementInterface" method="uploadProductImage"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/awMinifier/clearProductsImagesCache" method="POST">
+        <service class="Aheadworks\Minifier\Api\AuthorisedImageManagementInterface" method="clearProductsImagesCache"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+</routes>

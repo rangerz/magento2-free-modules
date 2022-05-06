@@ -1,0 +1,10 @@
+<?php
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var \Aheadworks\Minifier\ViewModel\Minifier\Head $viewModel */
+$viewModel = $block->getViewModel();
+?>
+<?php if ($viewModel->isEnablePrefetching()): ?>
+    <script src="<?= $block->getViewFileUrl('Aheadworks_Minifier::js/prefetcher.js') ?>" type="text/javascript"></script>
+<?php endif; ?>

@@ -1,0 +1,175 @@
+.breeze-input {
+    & when (@critical) {
+        outline: none;
+        position: relative;
+        padding: @input__padding;
+        width: 100%;
+
+        color: @input__color;
+        background: @input__background;
+        border: @input__border;
+        border-radius: @input__border-radius;
+        box-shadow: @input__shadow;
+
+        &:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+    }
+
+    & when not (@critical) {
+        &:focus {
+            --input-border-color: var(--input-focus-border-color);
+            --input-shadow-spread: @input__focus__shadow-spread;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            .lib-css(background-color, @input__focus__background);
+        }
+        &:-webkit-autofill {
+            -webkit-box-shadow: @input__shadow, 0 0 0 30px @muted__background inset;
+            -webkit-text-fill-color: @input__color;
+        }
+    }
+}
+
+.breeze-button {
+    & when (@critical) {
+        outline: none;
+        position: relative;
+        display: inline-block;
+
+        .lib-css(font-weight, @button__font-weight);
+        .lib-css(font-size, @button__font-size);
+        .lib-css(text-transform, @button__text-transform);
+
+        padding: @button__padding;
+        color: @button__color;
+        background: @button__background;
+        border: @button__border;
+        border-radius: @button__border-radius;
+        box-shadow: @button__shadow;
+        text-decoration: @button__text-decoration !important;
+
+        &:disabled,
+        &.disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+    }
+
+    & when not (@critical) {
+        .transition();
+
+        &:hover {
+            --button-bg-alpha: var(--button-hover-bg-alpha, .95);
+            text-decoration: @button__hover__text-decoration !important;
+        }
+        &:focus-visible {
+            --button-border-alpha: 1;
+            .lib-css(background, @button__focus__background);
+            .lib-css(color, @button__focus__color);
+            z-index: 10;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+    }
+}
+
+.breeze-button-primary {
+    & when (@critical) {
+        --link-color: var(--button-color);
+        --link-alpha: 1;
+    }
+}
+
+.breeze-button-secondary {
+    & when (@critical) {
+        --link-color: var(--button-color);
+        --link-alpha: 1;
+        --button-bg: var(--button-secondary-bg);
+        --button-color: var(--button-secondary-color);
+        --button-border-color: var(--button-secondary-border-color);
+    }
+}
+
+.breeze-button-link {
+    & when (@critical) {
+        --button-bg: transparent;
+        --button-color: var(--link-color);
+        text-decoration: @link__text-decoration !important;
+    }
+
+    & when not (@critical) {
+        &:hover {
+            text-decoration: @link__hover__text-decoration !important;
+        }
+    }
+}
+
+.breeze-button-ghost {
+    & when (@critical) {
+        --button-bg: var(--base-color);
+        --button-bg-alpha: 0;
+        --button-color: var(--base-color);
+        --button-border-color: var(--base-color);
+        --button-border-alpha: var(--base-alpha);
+    }
+
+    & when not (@critical) {
+        &:hover {
+            --button-bg-alpha: .1;
+        }
+    }
+}
+
+.button-reset {
+    --button-bg: var(--base-bg);
+    --button-border-color: var(--base-bg);
+    &:focus-visible {
+        .focus-ring();
+    }
+    padding: 0 !important;
+    background: transparent !important;
+    color: inherit !important;
+    border: 0 !important;
+    .text-align(left);
+}
+.button-x {
+    .float(right);
+    .button-reset();
+    opacity: .7;
+    cursor: pointer;
+    &::before {
+        display: block;
+        content: '';
+        width: @6;
+        height: @6;
+        width: @6;
+        height: @6;
+        .breeze-icon(@icon-x);
+    }
+    span {
+        .sr-only();
+    }
+}
+.breeze-button-xs {
+    .text-xs();
+    padding: @1 @2;
+}
+.breeze-button-lg {
+    .text-lg();
+    .lib-css(font-weight, @button__lg__font-weight);
+    .lib-css(padding, @button__lg__padding);
+}
+.breeze-button-xl {
+    .text-xl();
+    .lib-css(font-weight, @button__xl__font-weight);
+    .lib-css(padding, @button__xl__padding);
+}
+
+.input-xs {
+    .text-xs();
+    padding: @1;
+    width: auto;
+    flex-grow: 0;
+}

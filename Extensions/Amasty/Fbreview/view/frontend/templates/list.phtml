@@ -1,0 +1,29 @@
+<?php
+    use Amasty\Fbreview\Helper\Data;
+
+    /** @var \Amasty\Fbreview\Block\FbList $block */
+?>
+
+<div id="fb-root"></div>
+<script src="//connect.facebook.net/<?= $block->escapeHtml($block->getCurrentLocale()) ?>/all.js#xfbml=1"></script>
+<fb:comments
+        class="fb-comments"
+        href="<?= $block->escapeUrl($block->getCurrentUrl()); ?>"
+        width="<?= $block->escapeHtml($block->getConfigValueByPath(Data::CONFIG_PATH_DISPLAY_WIDTH)) ?>"
+        simple="<?= $block->escapeHtml($block->getConfigValueByPath(Data::CONFIG_PATH_DISPLAY_NOSTYLES) ? 'true' : 'false') ?>"
+        publish_feed="false"
+    <?php if ($title = $block->getConfigValueByPath(Data::CONFIG_PATH_GENERAL_TITLE)): ?>
+        title="<?= $block->escapeHtml($title) ?>"
+        reverse="<?= $block->escapeHtml($block->getConfigValueByPath(Data::CONFIG_PATH_GENERAL_ASCENDING) ? 'true' : 'false') ?>"
+        numposts="<?= $block->escapeHtml($block->getConfigValueByPath(Data::CONFIG_PATH_GENERAL_PERPAGE)) ?>"
+    <?php endif ?>
+
+    <?php if ($css = $block->getConfigValueByPath(Data::CONFIG_PATH_DISPLAY_CSS)): ?>
+        css="<?= $block->escapeUrl($block->getViewFileUrl("Amasty_Fbreview::css/$css")); ?> ?>"
+    <?php endif ?>
+>
+</fb:comments>
+<script>
+    FB.init({appId  : <?= $block->escapeHtml($block->getConfigValueByPath(Data::CONFIG_PATH_GENERAL_APPID)) ?>,
+        cookie : true, xfbml  : true, status : true});
+</script>

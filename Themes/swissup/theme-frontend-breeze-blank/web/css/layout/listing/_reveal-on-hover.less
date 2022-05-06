@@ -1,0 +1,163 @@
+& when (@critical) {
+    .products-grid .product-item {
+        // overflowed item that reveal its content on hover
+        & when not (@listing-grid-item__max-height = false) {
+            height: 0;
+            padding-bottom: @listing-grid-item__max-height;
+            overflow: hidden;
+            &::after {
+                &:extend(.gradient-overflow);
+            }
+
+            &:hover,
+            &:focus-within {
+                &::after {
+                    opacity: 0;
+                }
+            }
+
+            & when (@listing-grid-item-actions-primary__position = static) {
+                .actions-primary {
+                    opacity: 0;
+                    &:extend(.transition);
+                }
+                &:hover,
+                &:focus-within {
+                    .actions-primary {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            & when (@listing-grid-item-actions-secondary__position = static) {
+                .actions-secondary {
+                    opacity: 0;
+                    &:extend(.transition);
+                }
+                &:hover,
+                &:focus-within {
+                    .actions-secondary {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            & when (@listing-grid-item-swatches__position = static) {
+                [class^="swatch-opt-"] {
+                    opacity: 0;
+                    &:extend(.transition);
+                }
+                &:hover,
+                &:focus-within {
+                    [class^="swatch-opt-"] {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        // absolutely positioned primary button
+        & when (@listing-grid-item-actions-primary__position = absolute) {
+            .product-item-details {
+                .actions-primary {
+                    position: absolute;
+                    pointer-events: none;
+                    .lib-css(opacity, @listing-grid-item-actions-primary__opacity);
+                    .lib-css(transform, @listing-grid-item-actions-primary__transform);
+                    .lib-css(top, @listing-grid-item-actions-primary__top);
+                    .left(@listing-grid-item-actions-primary__left);
+                    .right(@listing-grid-item-actions-primary__right);
+                    &:extend(.transition);
+
+                    .tocart {
+                        .lib-css(--button-bg-alpha, @listing-grid-item-tocart--bg-alpha);
+                        .lib-css(--button-color, @listing-grid-item-tocart--color);
+                        .lib-css(--button-bg, @listing-grid-item-tocart--bg);
+                        .lib-css(box-shadow, @listing-grid-item-tocart__box-shadow);
+                        .lib-css(font-weight, @listing-grid-item-tocart__font-weight);
+                        .lib-css(font-size, @listing-grid-item-tocart__font-size);
+                        .lib-css(letter-spacing, @listing-grid-item-tocart__letter-spacing);
+                        .lib-css(text-transform, @listing-grid-item-tocart__text-transform);
+                        &:hover {
+                            .lib-css(--button-bg-alpha, @listing-grid-item-tocart__hover--bg-alpha);
+                        }
+                    }
+                    .stock {
+                        &:extend(.breeze-button);
+                        &:extend(.products-grid .product-item .product-item-details .actions-primary .tocart);
+                        color: @muted__color;
+                    }
+                }
+            }
+            @media @media-hover {
+                &:hover,
+                &:focus-within {
+                    .product-item-details {
+                        .actions-primary {
+                            opacity: 1;
+                            pointer-events: all;
+                            .lib-css(transform, @listing-grid-item-actions-primary__visible__transform);
+                        }
+                    }
+                }
+            }
+        }
+
+        // absolutely positioned secondary buttons
+        & when (@listing-grid-item-actions-secondary__position = absolute) {
+            .actions-secondary {
+                @media @media-hover {
+                    .lib-css(opacity, @listing-grid-item-actions-secondary__opacity);
+                    .lib-css(transform, @listing-grid-item-actions-secondary__transform);
+                }
+                @media @media-hover-none {
+                    .lib-css(transform, @listing-grid-item-actions-secondary__visible__transform);
+                }
+
+                position: absolute;
+                .lib-css(top, @listing-grid-item-actions-secondary__top);
+                .lib-css(flex-direction, @listing-grid-item-actions-secondary__flex-direction);
+                .right(@listing-grid-item-actions-secondary__right);
+                .left(@listing-grid-item-actions-secondary__left);
+                &:extend(.transition);
+            }
+            &:hover,
+            &:focus-within {
+                .actions-secondary {
+                    opacity: 1;
+                    .lib-css(transform, @listing-grid-item-actions-secondary__visible__transform);
+                }
+            }
+        }
+
+        & when (@listing-grid-item-swatches__position = absolute) {
+            .product-item-photo {
+                overflow: hidden;
+            }
+            [class^="swatch-opt-"] {
+                position: absolute;
+                pointer-events: none;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: 0 !important;
+                padding: @3;
+                --z-layer-bg-alpha: .85;
+                background: @z-layer__background;
+                transform: translateY(50%);
+                opacity: 0;
+                &:extend(.transition);
+            }
+            @media @media-hover {
+                &:hover,
+                &:focus-within {
+                    [class^="swatch-opt-"] {
+                        pointer-events: all;
+                        opacity: 1;
+                        transform: none;
+                    }
+                }
+            }
+        }
+    }
+}

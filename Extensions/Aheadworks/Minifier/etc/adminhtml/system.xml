@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="aheadworks" translate="label" sortOrder="300">
+            <label>Aheadworks Extensions</label>
+        </tab>
+        <section id="aw_minifier" translate="label" type="text" sortOrder="145" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Minifier</label>
+            <tab>aheadworks</tab>
+            <resource>Aheadworks_Minifier::config_aw_minifier</resource>
+            <group id="aw_minifier_setting" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General</label>
+                <field id="public_api_key" translate="label" type="obscure" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Public API Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="private_api_key" translate="label" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Private API Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="prefetching" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Prefetching</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[When this function is active, Minifier will track when a user is about to click a link on your shop and load that link in background before the user clicks on it. This way your browser will start loading the next page even before the user clicks the link, making it load faster.]]></comment>
+                </field>
+                <field id="aw_minifier_panel" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label></label>
+                    <frontend_model>Aheadworks\Minifier\Block\Adminhtml\System\Config\MinifierPanel</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

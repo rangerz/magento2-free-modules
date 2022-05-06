@@ -1,0 +1,24 @@
+& when (@critical) {
+    .checkout-onepage-success {
+        .column.main {
+            p {
+                &:extend(.breeze-prose p);
+            }
+            a {
+                &:extend(.link-common all);
+            }
+        }
+        #registration br {
+            display: none;
+        }
+    }
+    .checkout-success {
+        .page-narrow & {
+            text-align: center;
+            .actions-toolbar {
+                margin-top: @10;
+                justify-content: center;
+            }
+        }
+    }
+}

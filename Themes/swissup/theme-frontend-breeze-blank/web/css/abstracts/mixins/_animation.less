@@ -1,0 +1,19 @@
+.transition {
+    transition: background-color var(--transition-duration),
+                border-color var(--transition-duration),
+                box-shadow var(--transition-duration),
+                color var(--transition-duration),
+                opacity var(--transition-duration),
+                transform var(--transition-duration),
+                visibility var(--transition-duration) 0s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spinner {
+    animation: rotate var(--spinner-duration) linear infinite;
+    width: var(--spinner-size);
+    height: var(--spinner-size);
+    border: var(--spinner-border-width) solid ~"rgb(var(--spinner-border-color))";
+    border-top-color: transparent;
+    border-radius: 50%;
+}
